@@ -1,8 +1,8 @@
 # go-kafka-consumer
+This project is here to demonstrate simple flow of handling events from a kafka topic.
 ## Prerequisite:
 1. go lang insalled
 2. kafka broker url
-
 ## Build:
 ``go build ./src/main.go``
 ## Run:
