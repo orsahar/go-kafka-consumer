@@ -7,11 +7,25 @@ import (
 	"syscall"
 
 	"go-kafka-basic-consumer/src/handlers"
-	"go-kafka-basic-consumer/src/interfaces"
 
 	"github.com/confluentinc/confluent-kafka-go/kafka"
 	"github.com/joho/godotenv"
 )
+
+type KafkaEvent struct {
+	key   string
+	value string
+}
+
+// Key returns the key of the Kafka event.
+func (e KafkaEvent) Key() string {
+	return e.key
+}
+
+// Value returns the value of the Kafka event.
+func (e KafkaEvent) Value() string {
+	return e.value
+}
 
 // KafkaEventConsumer is responsible for consuming events from Kafka.
 type KafkaEventConsumer struct {
@@ -45,10 +59,9 @@ func (k *KafkaEventConsumer) Consume() {
 			fmt.Printf("Error reading message: %v\n", err)
 			continue
 		}
-
-		event := interfaces.Event{
-			Key:   string(msg.Key),
-			Value: string(msg.Value),
+		event := KafkaEvent{
+			key:   string(msg.Key),
+			value: string(msg.Value),
 		}
 
 		handlers.Handle(event)

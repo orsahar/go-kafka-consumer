@@ -1,7 +1,7 @@
 package interfaces
 
-// Event represents an event with a key and value.
-type Event struct {
-	Key   string
-	Value string
+// Event represents an interface for events with key and value.
+type Event interface {
+	Key() string
+	Value() string
 }
